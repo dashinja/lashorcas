@@ -35,13 +35,35 @@ const failCondition = guessesRemain === 0;
 // }
 
 //---------------------TWO---------
+wordReveal = function() {
+  if (wordBlankChoice.includes(keyPress)) {
+    wordBlankChoice = wordBlankChoice.split('');
+    wordHolder = wordBlankChoice.filter(keyPress => {
+      let place = wordBlankChoice.indexOf(keyPress);
+      if (place !== -1) {
+        let letterRevealer;
+        // = wordBlanks().wordblanks.split(',');
+        letterRevealer = wordBlanks()
+          .wordblanks.splice(place, 1, keyPress)
+          .join(' ');
+        console.log(letterRevealer);
+        return {
+          letterRevealer: letterRevealer
+        };
+      }
+    });
+  }
+};
 
-/*  var wordReveal = () => {
+console.log(wordReveal.letterRevealer);
+/*
+USE ABOVE, not me.
+ var wordReveal = () => {
       if(wordBlankChoice.includes(keyPress)) {
-        wordHolder = wordBlankChoice.filter((keyPress) => {
+        wordHolder = wordBlankChoice.filter((keyPress) => { ////// <---- YOU CAN'T FILTER A NON-ARRAY! see above!
           let place = wordBlankChoice.indexOf(keyPress);
             if ( place !== (-1) ) {
-              let letterRevealer = wordBlanks().wordblanks.split(','); //CAREFUL, THIS IS A STRING NOT ARRAY!
+              let letterRevealer = wordBlanks().wordblanks.split(',');
               letterRevealer = wordBlanks().wordblanks.splice(place, 1, keyPress).join(' ')
               return letterRevealer;
             }
@@ -50,6 +72,8 @@ const failCondition = guessesRemain === 0;
     }
 
 
+/*
+// Old. Disregard?
 wordHolder.map(()=>{
       if ()
     })
@@ -112,11 +136,26 @@ wordBlanks = function() {
                             winConditionText.innerHTML = ""
                             ]
               [if False]
-                [push keyPress to guessedLetters]
-                [display guessedLettersText.innerHTML = guessedLetters.join(', ') to id="guessedLetters-text"]
-                [decrement guessesRemain]
-                  [display guessesRemainText.innerHTML = guessesRemain ]
-                [display  instruction.innerHTML = "Try again!"]
-                  [*Optional* include in instruction.innerHTML the guessesRemain countdown]
+                [Check if failCondition true]
+                    [if True]
+                      [Display winConditionText.innerHTML = "You just lost!"]
+                      [increment loses++]
+                      [// To ready the RESET: keyPressCount = 0]
+                        [if KeyPressCount > 0 {RESETS}]
+                          [RESETS
+                            guessedLetters = ""
+                            guessedLettersText.innerHTML = ""
+                            guessesRemain = 5
+                            guessesRemainText.innerHTML = 5
+                            wordReveal = ""
+                            instruction.innerHTML = "Press any key to start"
+                            winConditionText.innerHTML = ""]
+                    [if false] // failCondition false
+                      [push keyPress to guessedLetters]
+                      [display guessedLettersText.innerHTML = guessedLetters.join(', ') to id="guessedLetters-text"]
+                      [decrement guessesRemain]
+                        [display guessesRemainText.innerHTML = guessesRemain ]
+                      [display  instruction.innerHTML = "Try again!"]
+                        [*Optional* include in instruction.innerHTML the guessesRemain countdown]
 
                   */
