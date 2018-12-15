@@ -63,13 +63,13 @@ function startGame() {
   //Word Selection && Display Blanks
 
   document.onkeyup = function(event) {
-    console.log('I just pressed a key');
+    // console.log('I just pressed a key');
     keyPress = event.key;
-    console.log('keyPress freshly declared: ', keyPress);
+    // console.log('keyPress freshly declared: ', keyPress);
     keyPressCount++;
-    console.log('keyPress secondly asked for: ', keyPress);
+    console.log(`keypress count ${keyPressCount}`);
 
-    // Allows only wrong guess to post to guessed letters
+    
     // if (!wordBlankChoice.includes(keyPress)) {
     //   guessedLetters.push(keyPress);
     //   guessedLettersText.textContent = guessedLetters;
@@ -77,14 +77,12 @@ function startGame() {
     //   return;
     // }
 
-    console.log('I just got guessed: ', keyPress);
+    console.log('Pressed: ', keyPress);
     winConditionText.textContent = ' Game in Progress';
     instructionText.textContent = 'Keep going! You can do it!';
     if (wordBlankChoice.includes(keyPress) !== true) {
       guessesRemain--;
     }
-    console.log(`key pressed: ${keyPress}`);
-    console.log(`keypress count ${keyPressCount}`);
 
     // reveals wordblanks one by one
     wordReveal = function() {
@@ -94,17 +92,31 @@ function startGame() {
 
         //string to array for use of filter()
         let wordChoiceArray = wordBlankChoice.split('');
-        console.log('split wordBankChoice: ' + wordChoiceArray);
-        let wordHolder = wordChoiceArray.filter(keyPress => {
-          let place = wordChoiceArray.indexOf(keyPress);
+        console.log('split wordChoiceArray: ' + wordChoiceArray);
+        let wordHolder = wordChoiceArray.map(keyPress => { //make me map instead? wordHolder is array keyPress=each index of wordChoiceArray
+          let place = wordChoiceArray.indexOf(keyPress); //place = num
           console.log('place var: ' + place);
           if (place !== -1) {
             // = wordBlanks().wordblanks.split(',');
-            let letterRevealer = wordBlanks() // string
-              //to array
-              .split(',')
-              //finds place where letter matches blank, puts letter in place of blank
-              .splice(place, 1, keyPress);
+            
+            let letterRevealerHolder = wordBlanks().split('') //array
+            console.log('letterRevealerHolder: ', letterRevealerHolder)
+            let letterRevealer = letterRevealerHolder.splice(place, 1, keyPress) // string
+            // let letterRevealer = wordBlanks().split(',').splice(place, 1, keyPress) // string
+            console.log('Just made letterRevealer: ', letterRevealer)
+            //PSEUDO:
+            /*
+            in Map:
+            operation = letterRevealerHolder
+            
+            */
+           
+           // let letterRevealer = letterRevealerHolder.indexOf(keyPress).push()
+
+              // //to array
+              // .split(',')
+              // //finds place where letter matches blank, puts letter in place of blank
+              // .splice(place, 1, keyPress);
             console.log('I just spliced this: ' + letterRevealer);
 
             //to string
@@ -117,14 +129,10 @@ function startGame() {
             return;
           }
         });
+        console.log(wordHolder);
       } else {
-        // document.createElement('div');
-        console.log(guessedLetters);
 
-        // if (guessedLetters.join('').includes(wordBlankChoice) !== true) {
-          // }
-          // might be useless, see wrongGuesses below
-          
+          // Allows only wrong guess to post to guessed letters
           guessedLetters.push(keyPress);
             guessedLettersText.textContent = guessedLetters
               .join(' ')
