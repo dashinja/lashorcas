@@ -1,3 +1,4 @@
+'use strict';
 // ID Dump
 // wins-text
 // loses-text
@@ -13,7 +14,7 @@ let keyPressCount = 0;
 let wins = 0;
 let loses = 0;
 let guessedLetters = [];
-let guessesRemain = 5;
+let guessesRemain;
 let wordReveal;
 
 let wordList = ['Byron', 'Cedric', 'Dominoes'];
@@ -33,13 +34,13 @@ let instructionText = document.getElementById('instruction-text');
 function startGame() {
   //Resets
   guessedLetters = [];
-  guessesremain = 5;
+  guessesRemain = 5;
   guessesRemainText.textContent = guessesRemain;
   instructionText.textContent =
     'See the blanks? Press a letter to guess the word.';
 
   //Selects word from wordList
-  wordBlankChoice = wordList[
+  const wordBlankChoice = wordList[
     Math.floor(Math.random() * wordList.length)
   ].toLowerCase(); //string
 
@@ -51,7 +52,7 @@ function startGame() {
     for (let i = 0; i < wordBlankChoice.length; i++) {
       holder.push(`_`);
     }
-    wordblanks = holder.join(' ');
+    let wordblanks = holder.join(' ');
     return wordblanks; //string
   };
 
@@ -67,8 +68,16 @@ function startGame() {
     console.log('keyPress freshly declared: ', keyPress);
     keyPressCount++;
     console.log('keyPress secondly asked for: ', keyPress);
-    guessedLetters.push(keyPress);
-    console.log('I just got guessed: ', guessedLetters);
+
+    // Allows only wrong guess to post to guessed letters
+    // if (!wordBlankChoice.includes(keyPress)) {
+    //   guessedLetters.push(keyPress);
+    //   guessedLettersText.textContent = guessedLetters;
+    // } else {
+    //   return;
+    // }
+
+    console.log('I just got guessed: ', keyPress);
     winConditionText.textContent = ' Game in Progress';
     instructionText.textContent = 'Keep going! You can do it!';
     if (wordBlankChoice.includes(keyPress) !== true) {
@@ -84,7 +93,7 @@ function startGame() {
         console.log('My earlier key press matches a letter(s) in chosen word');
 
         //string to array for use of filter()
-        wordChoiceArray = wordBlankChoice.split('');
+        let wordChoiceArray = wordBlankChoice.split('');
         console.log('split wordBankChoice: ' + wordChoiceArray);
         let wordHolder = wordChoiceArray.filter(keyPress => {
           let place = wordChoiceArray.indexOf(keyPress);
@@ -113,19 +122,20 @@ function startGame() {
         console.log(guessedLetters);
 
         // if (guessedLetters.join('').includes(wordBlankChoice) !== true) {
-        //   guessedLettersText.textContent = guessedLetters
-        //     .join(' ')
-        //     .toUpperCase()
-        //     .split(' ')
-        //     .join(' ');
-        // }
-        // might be useless, see wrongGuesses below
+          // }
+          // might be useless, see wrongGuesses below
+          
+          guessedLetters.push(keyPress);
+            guessedLettersText.textContent = guessedLetters
+              .join(' ')
+              .toUpperCase()
+              .split(' ')
+              .join(' ');
 
-        let wrongGuesses = guessedLetters.filter(letters => {
-          (guessedLetters[letters] === wordBlankChoice[letters])
-        });
-        // guessesRemainText.textContent = //finish me
-        console.log('Processed wrongGuesses: ', wrongGuesses);
+        // let wrongGuesses = guessedLetters.filter(letters => {
+        //   guessedLetters[letters] === wordBlankChoice[letters];
+        // });
+        // console.log('Processed wrongGuesses: ', wrongGuesses);
       }
     };
 
