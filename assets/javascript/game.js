@@ -82,6 +82,8 @@ function startGame() {
     instructionText.textContent = 'Keep going! You can do it!';
     if (wordBlankChoice.includes(keyPress) !== true) {
       guessesRemain--;
+    } else {
+      return
     }
 
     // reveals wordblanks one by one
@@ -93,62 +95,72 @@ function startGame() {
         //string to array for use of filter()
         let wordChoiceArray = wordBlankChoice.split('');
         console.log('split wordChoiceArray: ' + wordChoiceArray);
-        let wordHolder = wordChoiceArray.map(keyPress => { //make me map instead? wordHolder is array keyPress=each index of wordChoiceArray
+
+        let wordHolder = function() { 
+        // wordChoiceArray.map(keyPress => { //make me map instead? wordHolder is array keyPress=each index of wordChoiceArray
+          
+          for (let i=0; i < wordChoiceArray.length; i++) {
           let place = wordChoiceArray.indexOf(keyPress); //place = num
           console.log('place var: ' + place);
-          if (place !== -1) {
-            // = wordBlanks().wordblanks.split(',');
+            if (place !== -1) {
+              // = wordBlanks().wordblanks.split(',');
+              
+              let letterRevealerHolder = wordBlanks().split('') //array
+              console.log('letterRevealerHolder: ', letterRevealerHolder)
+              let letterRevealer = letterRevealerHolder.splice(place, 1, keyPress) // string
+              // let letterRevealer = wordBlanks().split(',').splice(place, 1, keyPress) // string
+              console.log('Just made letterRevealer: ', letterRevealer)
+              //PSEUDO:
+              /*
+              in Map:
+              operation = letterRevealerHolder
+              
+              */
             
-            let letterRevealerHolder = wordBlanks().split('') //array
-            console.log('letterRevealerHolder: ', letterRevealerHolder)
-            let letterRevealer = letterRevealerHolder.splice(place, 1, keyPress) // string
-            // let letterRevealer = wordBlanks().split(',').splice(place, 1, keyPress) // string
-            console.log('Just made letterRevealer: ', letterRevealer)
-            //PSEUDO:
-            /*
-            in Map:
-            operation = letterRevealerHolder
-            
-            */
-           
-           // let letterRevealer = letterRevealerHolder.indexOf(keyPress).push()
+            // let letterRevealer = letterRevealerHolder.indexOf(keyPress).push()
 
-              // //to array
-              // .split(',')
-              // //finds place where letter matches blank, puts letter in place of blank
-              // .splice(place, 1, keyPress);
-            console.log('I just spliced this: ' + letterRevealer);
+                // //to array
+                // .split(',')
+                // //finds place where letter matches blank, puts letter in place of blank
+                // .splice(place, 1, keyPress);
+              // console.log('I just spliced this: ' + letterRevealer);
 
-            //to string
-            letterRevealer.join(' ');
-            // console.log('place var: ' + place)
-            console.log('letterRevealer value: ' + letterRevealer);
-            return letterRevealer;
-          } else {
-            console.log('Error: Condition not met.');
-            return;
-          }
-        });
-        console.log(wordHolder);
+              //to string
+              // letterRevealer.join(' ');
+              // console.log('place var: ' + place)
+              // console.log('letterRevealer value: ' + letterRevealer);
+              return letterRevealer;
+            } else {
+              console.log('Error: Condition not met.');
+              return;
+            }
+          }// for loop ends
+        }//wordHolder() end
+        wordHolder();
+        console.log(wordHolder());
       } else {
 
-          // Allows only wrong guess to post to guessed letters
-          guessedLetters.push(keyPress);
-            guessedLettersText.textContent = guessedLetters
-              .join(' ')
-              .toUpperCase()
-              .split(' ')
-              .join(' ');
+        // Allows only wrong guess to post to guessed letters
+        guessedLetters.push(keyPress);
+          guessedLettersText.textContent = guessedLetters
+            .join(' ')
+            .toUpperCase()
+            .split(' ')
+            .join(' ');
+        console.log('guessed letters: ',guessedLetters)
+        console.log('guessedLettersText ',guessedLettersText.textContent)
+      };
+    } //wordReveal() end;
 
+
+        ////////trash/////
         // let wrongGuesses = guessedLetters.filter(letters => {
         //   guessedLetters[letters] === wordBlankChoice[letters];
         // });
         // console.log('Processed wrongGuesses: ', wrongGuesses);
-      }
-    };
-
-    wordReveal();
-  };
-}
+    wordReveal()
+  }//onkeyup function end
+  
+}//gameStart() end;
 
 startGame();
