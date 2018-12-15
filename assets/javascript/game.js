@@ -41,7 +41,8 @@ function startGame() {
   //Selects word from wordList
   wordBlankChoice = wordList[
     Math.floor(Math.random() * wordList.length)
-  ].toLowerCase();
+  ].toLowerCase(); //string
+
   console.log(`chosen word: ${wordBlankChoice}`);
 
   //Make Blanks for Chosen Word Appear
@@ -63,14 +64,16 @@ function startGame() {
   document.onkeyup = function(event) {
     console.log('I just pressed a key');
     keyPress = event.key;
-    console.log('keyPress freshly declared: ', keyPress)
+    console.log('keyPress freshly declared: ', keyPress);
     keyPressCount++;
-    console.log('keyPress secondly asked for: ', keyPress)
-    guessedLetters.push(keyPress)
-    console.log('I just got guessed: ', guessedLetters)
-    guessesRemainText.textContent = guessesremain;
+    console.log('keyPress secondly asked for: ', keyPress);
+    guessedLetters.push(keyPress);
+    console.log('I just got guessed: ', guessedLetters);
     winConditionText.textContent = ' Game in Progress';
     instructionText.textContent = 'Keep going! You can do it!';
+    if (wordBlankChoice.includes(keyPress) !== true) {
+      guessesRemain--;
+    }
     console.log(`key pressed: ${keyPress}`);
     console.log(`keypress count ${keyPressCount}`);
 
@@ -81,10 +84,10 @@ function startGame() {
         console.log('My earlier key press matches a letter(s) in chosen word');
 
         //string to array for use of filter()
-        wordBlankChoice = wordBlankChoice.split('');
-        console.log('split wordBankChoice: ' + wordBlankChoice);
-        let wordHolder = wordBlankChoice.filter(keyPress => {
-          let place = wordBlankChoice.indexOf(keyPress);
+        wordChoiceArray = wordBlankChoice.split('');
+        console.log('split wordBankChoice: ' + wordChoiceArray);
+        let wordHolder = wordChoiceArray.filter(keyPress => {
+          let place = wordChoiceArray.indexOf(keyPress);
           console.log('place var: ' + place);
           if (place !== -1) {
             // = wordBlanks().wordblanks.split(',');
@@ -107,11 +110,22 @@ function startGame() {
         });
       } else {
         // document.createElement('div');
-        console.log(guessedLetters)
-        guessedLettersText.textContent = guessedLetters.join(' ')
-          .toUpperCase().split(' ').join(' ')
-          console.log(keyPress)
-          console.log(guessedLettersText)
+        console.log(guessedLetters);
+
+        // if (guessedLetters.join('').includes(wordBlankChoice) !== true) {
+        //   guessedLettersText.textContent = guessedLetters
+        //     .join(' ')
+        //     .toUpperCase()
+        //     .split(' ')
+        //     .join(' ');
+        // }
+        // might be useless, see wrongGuesses below
+
+        let wrongGuesses = guessedLetters.filter(letters => {
+          (guessedLetters[letters] === wordBlankChoice[letters])
+        });
+        // guessesRemainText.textContent = //finish me
+        console.log('Processed wrongGuesses: ', wrongGuesses);
       }
     };
 
