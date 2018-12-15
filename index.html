@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!-- Bootstrap -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -11,11 +13,6 @@
       crossorigin="anonymous"
     />
 
-    <title>Word Guess Game</title>
-  </head>
-  <body>
-    
-    <!-- Bootstrap -->
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -32,6 +29,35 @@
       crossorigin="anonymous"
     ></script>
     <!-- My Scripts -->
-    <script src="assets/javascript/game.js"></script>
+
+    <title>Word Guess Game</title>
+  </head>
+  <body>
+    <header><h1 class="display-3">Welcome to Hangman</h1></header>
+    <div class="card">
+      <p>
+        Instructions:
+        <span id="instruction-text"></span>
+      </p>
+    </div>
+    <div class="card">
+      <p>Fill in the blanks: <span id="wordBlanks-text"></span></p>
+    </div>
+    <div class="card">
+      <p>Guesses Remaining: <span id="guessesRemain-text"></span></p>
+    </div>
+    <div class="card">
+      <p>Guessed Letters: <span id="guessedLetters-text"></span></p>
+    </div>
+    <div class="card">
+      <p>Status:<span id="winOrLose-text"></span></p>
+    </div>
+    <div class="card">
+      <p>Wins: <span id="wins-text"></span></p>
+    </div>
+    <div class="card">
+      <p>Loses: <span id="loses-text"></span></p>
+    </div>
   </body>
+  <script src="assets/javascript/game.js"></script>
 </html>

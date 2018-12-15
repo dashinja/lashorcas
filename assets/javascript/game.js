@@ -7,155 +7,116 @@
 // instruction-text
 
 // Variable Dump
+// let userGuess = event.key;
 let keyPress;
 let keyPressCount = 0;
-// let userGuess = event.key;
-let wordList = [];
-let wordBlanks;
 let wins = 0;
 let loses = 0;
-let wordReveal; // reveals wordblanks one by one
-let guessedLetters;
+let guessedLetters = [];
 let guessesRemain = 5;
-let wordRevealText = document.getElementById('guessedLetters-text');
+let wordReveal;
+
+let wordList = ['Byron', 'Cedric', 'Dominoes'];
+
+// DOM write variables
+let wordRevealText = document.getElementById('wordBlanks-text');
 let guessedLettersText = document.getElementById('guessedLetters-text');
 let guessesRemainText = document.getElementById('guessesRemain-text');
 let winConditionText = document.getElementById('winOrLose-text');
-let instruction = document.getElementById('instruction-text');
+let instructionText = document.getElementById('instruction-text');
 
-//condition to be used in if statement
-const winCondition = wordReveal.includes('_') === false;
-const failCondition = guessesRemain === 0;
+//condition to be used in if statement/////////////
+// const winCondition = wordReveal.includes('_') === false;
+// const failCondition = guessesRemain === 0;
 
-// Function Dump
-//---------------------ONE---------
-// For to capture keypress
-// document.onkeyup = function(event) {
+// Game Start ///////////
+function startGame() {
+  //Resets
+  guessedLetters = [];
+  guessesremain = 5;
+  guessesRemainText.textContent = guessesRemain;
+  instructionText.textContent =
+    'See the blanks? Press a letter to guess the word.';
 
-// }
+  //Selects word from wordList
+  wordBlankChoice = wordList[
+    Math.floor(Math.random() * wordList.length)
+  ].toLowerCase();
+  console.log(`chosen word: ${wordBlankChoice}`);
 
-//---------------------TWO---------
-wordReveal = function() {
-  if (wordBlankChoice.includes(keyPress)) {
-    wordBlankChoice = wordBlankChoice.split('');
-    wordHolder = wordBlankChoice.filter(keyPress => {
-      let place = wordBlankChoice.indexOf(keyPress);
-      if (place !== -1) {
-        let letterRevealer;
-        // = wordBlanks().wordblanks.split(',');
-        letterRevealer = wordBlanks()
-          .wordblanks.splice(place, 1, keyPress)
-          .join(' ');
-        console.log(letterRevealer);
-        return {
-          letterRevealer: letterRevealer
-        };
-      }
-    });
-  }
-};
-
-console.log(wordReveal.letterRevealer);
-/*
-USE ABOVE, not me.
- var wordReveal = () => {
-      if(wordBlankChoice.includes(keyPress)) {
-        wordHolder = wordBlankChoice.filter((keyPress) => { ////// <---- YOU CAN'T FILTER A NON-ARRAY! see above!
-          let place = wordBlankChoice.indexOf(keyPress);
-            if ( place !== (-1) ) {
-              let letterRevealer = wordBlanks().wordblanks.split(',');
-              letterRevealer = wordBlanks().wordblanks.splice(place, 1, keyPress).join(' ')
-              return letterRevealer;
-            }
-        })
-      }
+  //Make Blanks for Chosen Word Appear
+  const wordBlanks = function() {
+    let holder = [];
+    for (let i = 0; i < wordBlankChoice.length; i++) {
+      holder.push(`_`);
     }
-
-
-/*
-// Old. Disregard?
-wordHolder.map(()=>{
-      if ()
-    })
-
-*/
-
-//---------------------THREE---------
-//Make Blanks for Chosen Word Appear
-wordList = ['Byron', 'Cedric', 'Dominoes'];
-
-wordBlankChoice = wordList[Math.floor(Math.random() * wordList.length)];
-console.log(wordBlankChoice);
-
-wordHolder = wordBlankChoice.splice(0);
-
-wordBlanks = function() {
-  let holder = [];
-  for (let i = 0; i < wordBlankChoice.length; i++) {
-    holder.push(`_`);
-  }
-  wordblanks = holder.join(' ');
-  return {
-    wordblanks: wordblanks,
-    holder: holder //<--maybe not needed, refactor to just wordblanks?
+    wordblanks = holder.join(' ');
+    return wordblanks; //string
   };
-};
-/* ========================= */
 
-/*  Game Process
-    1.  Landing page shows visuals && instructions [Press any key to start]
-          [on first .onkeyup increment keyPressCount]
+  wordRevealText.textContent = wordBlanks();
+  console.log('call wordBlanks(): ' + wordBlanks());
 
-    2.  Instructions go away && game begins
-          [Invoke wordBlanks() to show blanks]
-          [Show the letters guessed area]
+  //User Presses Key
+  //Word Selection && Display Blanks
 
-    3.  User Press Key To Guess
-          [increment keyPressCount again]
-          [collect keyPress for store]
-          [begin large conditional based on (keyPressCount > 2)]
-            [//LATER// Remember to reset keyPressCount upon winning or losing]
-            [verify wordBlankChoice includes keyPress or not i.e. if(wordBlankChoice.includes(keyPress)) ]
-              [if True]
-                [Make wordReveal function]
-                [Execute wordReveal function]
-                [Display results from a modified wordRevealText.innerHTML = wordReveal]
-                  [Check for winCondition true]
-                    [if True]
-                      [Display winConditionText.innerHTML = "You just won!"]
-                      [increment wins++]
-                      [// To ready the RESET: keyPressCount = 0]
-                        [if KeyPressCount > 0 {RESETS}]
-                          [RESETS
-                            guessedLetters = ""
-                            guessedLettersText.innerHTML = ""
-                            guessesRemain = 5
-                            guessesRemainText.innerHTML = 5
-                            wordReveal = ""
-                            instruction.innerHTML = "Press any key to start"
-                            winConditionText.innerHTML = ""
-                            ]
-              [if False]
-                [Check if failCondition true]
-                    [if True]
-                      [Display winConditionText.innerHTML = "You just lost!"]
-                      [increment loses++]
-                      [// To ready the RESET: keyPressCount = 0]
-                        [if KeyPressCount > 0 {RESETS}]
-                          [RESETS
-                            guessedLetters = ""
-                            guessedLettersText.innerHTML = ""
-                            guessesRemain = 5
-                            guessesRemainText.innerHTML = 5
-                            wordReveal = ""
-                            instruction.innerHTML = "Press any key to start"
-                            winConditionText.innerHTML = ""]
-                    [if false] // failCondition false
-                      [push keyPress to guessedLetters]
-                      [display guessedLettersText.innerHTML = guessedLetters.join(', ') to id="guessedLetters-text"]
-                      [decrement guessesRemain]
-                        [display guessesRemainText.innerHTML = guessesRemain ]
-                      [display  instruction.innerHTML = "Try again!"]
-                        [*Optional* include in instruction.innerHTML the guessesRemain countdown]
+  document.onkeyup = function(event) {
+    console.log('I just pressed a key');
+    keyPress = event.key;
+    console.log('keyPress freshly declared: ', keyPress)
+    keyPressCount++;
+    console.log('keyPress secondly asked for: ', keyPress)
+    guessedLetters.push(keyPress)
+    console.log('I just got guessed: ', guessedLetters)
+    guessesRemainText.textContent = guessesremain;
+    winConditionText.textContent = ' Game in Progress';
+    instructionText.textContent = 'Keep going! You can do it!';
+    console.log(`key pressed: ${keyPress}`);
+    console.log(`keypress count ${keyPressCount}`);
 
-                  */
+    // reveals wordblanks one by one
+    wordReveal = function() {
+      //checks for right letters
+      if (wordBlankChoice.includes(keyPress)) {
+        console.log('My earlier key press matches a letter(s) in chosen word');
+
+        //string to array for use of filter()
+        wordBlankChoice = wordBlankChoice.split('');
+        console.log('split wordBankChoice: ' + wordBlankChoice);
+        let wordHolder = wordBlankChoice.filter(keyPress => {
+          let place = wordBlankChoice.indexOf(keyPress);
+          console.log('place var: ' + place);
+          if (place !== -1) {
+            // = wordBlanks().wordblanks.split(',');
+            let letterRevealer = wordBlanks() // string
+              //to array
+              .split(',')
+              //finds place where letter matches blank, puts letter in place of blank
+              .splice(place, 1, keyPress);
+            console.log('I just spliced this: ' + letterRevealer);
+
+            //to string
+            letterRevealer.join(' ');
+            // console.log('place var: ' + place)
+            console.log('letterRevealer value: ' + letterRevealer);
+            return letterRevealer;
+          } else {
+            console.log('Error: Condition not met.');
+            return;
+          }
+        });
+      } else {
+        // document.createElement('div');
+        console.log(guessedLetters)
+        guessedLettersText.textContent = guessedLetters.join(' ')
+          .toUpperCase().split(' ').join(' ')
+          console.log(keyPress)
+          console.log(guessedLettersText)
+      }
+    };
+
+    wordReveal();
+  };
+}
+
+startGame();
