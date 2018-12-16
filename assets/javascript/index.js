@@ -100,7 +100,7 @@ function chooseWord() {
   theChosenOne = wordList[
     Math.floor(Math.random() * wordList.length)
   ].toLowerCase();
-  console.log(theChosenOne);
+   (theChosenOne);
 }
 
 function makeWordBlanks() {
@@ -110,7 +110,7 @@ function makeWordBlanks() {
     wordBlanks.push('_');
   }
   // writeWordBlanks(wordBlanks)
-  // console.log(writeWordBlanks(wordBlanks));
+  //  (writeWordBlanks(wordBlanks));
 }
 
 document.onkeyup = function(event) {
@@ -131,12 +131,12 @@ document.onkeyup = function(event) {
 function keyCheckTrue(letter) {
   // key is in word
   if (theChosenOne.includes(letter)) {
-    console.log('I check if true');
+     ('I check if true');
     replaceLetter(letter);
     gameStatus();
   } else {
     // key not in word
-    console.log("I'm letter before keyCheckFalse(): ", letter);
+     ("I'm letter before keyCheckFalse(): ", letter);
     keyCheckFalse(letter);
     gameStatus()
   }
@@ -149,10 +149,10 @@ function keyCheckFalse(letter) {
   // DECREMENT guesses remaining
   if (!theChosenOne.includes(letter) && guessesRemain !== 0) {
     guessesRemain--;
-    // console.log("I'm letter before the push: ", letter);
+    //  ("I'm letter before the push: ", letter);
     guessedLetters.push(letter);
     
-    // console.log('I am guessedLetters: ', guessedLetters);
+    //  ('I am guessedLetters: ', guessedLetters);
     writeDOM();
   } else if (guessesRemain === 0) {
     youLose();
@@ -166,16 +166,16 @@ function replaceLetter(letter) {
     if (theChosenOne[i] === letter) {
       wordBlanks[i] = letter;
       correctLetterCount++;
-      console.log(wordBlanks);
+       (wordBlanks);
     }
   }
-  console.log('correctLetterCount: ', correctLetterCount);
+   ('correctLetterCount: ', correctLetterCount);
 
   writeWordBlanks(wordBlanks);
   gameStatus();
-  // console.log(wordBlanks)
+  //  (wordBlanks)
   // test = letter
-  // console.log(test)
+  //  (test)
 }
 
 function gameStatus() {
