@@ -46,79 +46,95 @@
     <title>Word Guess Game</title>
   </head>
   <body>
-    <div class="jumbotron w-25 mx-sm-auto">
-      <img src="assets/images/Tyburn_tree.jpg" alt="" class="img-fluid mx-auto w-100 d-block">
-      <div class="container text-center mt-3">
-        <h1 class="display-4">Bienvenido a Las Horcas</h1>
-        <p class="lead">We won't leave ya hangin'...</p>
-        <p class="small">(not too long anyway)</p>
+    <main class="container w-75">
+      <div class="jumbotron mt-3 mb-2 mx-sm-auto w-50">
+        <img
+          src="assets/images/Tyburn_tree.jpg"
+          alt=""
+          class="img-fluid mx-auto w-100 d-block"
+        />
+        <div class="container text-center mt-3">
+          <h1 class="display-4">Bienvenido a Las Horcas</h1>
+          <p class="lead">We won't leave ya hangin'...</p>
+          <p class="small">(not too long anyway)</p>
+        </div>
       </div>
-    </div>
 
-    <!-- Modal Test--------------------- -->
-    <!--
-      <div id="myModalLose" class="modal">
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target=".bd-example-modal-sm"
-        >
-          You Lost!
-        </button>
+      <!-- Modal Test--------------------- -->
+      <!--
+        <div id="myModalLose" class="modal">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target=".bd-example-modal-sm"
+          >
+            You Lost!
+          </button>
 
-        <div
-          class="modal fade bd-example-modal-sm"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="mySmallModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content">What goes here?</div>
+          <div
+            class="modal fade bd-example-modal-sm"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="mySmallModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">What goes here?</div>
+            </div>
           </div>
         </div>
-      </div>
-    -->
-    <!-- -end modal test------------------------------ -->
+      -->
+      <!-- -end modal test------------------------------ -->
 
-    <section class="container">
-      <!-- -row 1 -->
-      <!-- Instructions -->
-      <div class="row mx-sm-auto mb-sm-1 w-50">
-        <div class="card col col-offset-0 col-sm-10 offset-sm-1 justify-content-center">
-          <p class="justify-content-center">Instructions: <span id="instruction-text" class="justify-content-center"></span></p>
+      <section class="container">
+        <!-- -row 1 -->
+        <!-- Instructions -->
+        <div class="row mx-sm-auto mb-sm-1 w-50">
+          <div
+            class="card col col-offset-0 col-sm-10 offset-sm-1 justify-content-center"
+          >
+            <p class="justify-content-center">
+              Instructions:
+              <span id="instruction-text" class="justify-content-center"></span>
+            </p>
+          </div>
         </div>
-      </div>
-      <!-- row 2 -->
-      <!-- -Fill in Blanks and Guessed Letters -->
-      <div class="row mx-sm-auto w-50 mb-sm-1">
-        <div class="card col-12 col-md-6 align-items-center">
-          <p>Fill in the blanks: <span id="wordBlanks-text"></span></p>
+        <!-- row 2 -->
+        <!-- -Fill in Blanks and Guessed Letters -->
+        <div class="row mx-sm-auto w-50 mb-sm-1">
+          <div class="card col-12 col-md-6 align-items-center">
+            <p>Fill in the blanks: <span id="wordBlanks-text"></span></p>
+          </div>
+          <div class="card col col-md-6 align-items-center">
+            <p>Guessed Letters: <span id="guessedLetters-text"></span></p>
+          </div>
         </div>
-        <div class="card col col-md-6 align-items-center">
-          <p>Guessed Letters: <span id="guessedLetters-text"></span></p>
+        <!-- row 3 -->
+        <!-- Guesses Remaining, Wins, Loses -->
+        <div class="row mx-auto w-50">
+          <div class="card col-6">
+            <p>Guesses Remaining: <span id="guessesRemain-text"></span></p>
+          </div>
+          <div class="card col-3">
+            <p>Wins: <span id="wins-text"></span></p>
+          </div>
+          <div class="card col-3">
+            <p>Loses: <span id="loses-text"></span></p>
+          </div>
         </div>
-      </div>
-      <!-- row 3 -->
-      <!-- Guesses Remaining, Wins, Loses -->
-      <div class="row mx-auto w-50">
-        <div class="card col-6">
-          <p>Guesses Remaining: <span id="guessesRemain-text"></span></p>
+        <!-- row 4 -->
+        <!-- Word View Test: REMOVE ME -->
+        <!--
+          <div class="row my-2 justify-content-center">
+            <p>The Word: <span id="theWordTest-text"></span></p>
+          </div>
+        -->
+        <div class="row my-2 justify-content-center">
+          <p>Created by: <span>Byron Miller</span></p>
         </div>
-        <div class="card col-3">
-          <p>Wins: <span id="wins-text"></span></p>
-        </div>
-        <div class="card col-3">
-          <p>Loses: <span id="loses-text"></span></p>
-        </div>
-      </div>
-      <!-- row 4 -->
-      <!-- Word View Test: REMOVE ME -->
-      <div class="row my-2 justify-content-center">
-        <p>The Word: <span id="theWordTest-text"></span></p>
-      </div>
-    </section>
+      </section>
+    </main>
   </body>
   <script src="assets/javascript/failure.js"></script>
 </html>
