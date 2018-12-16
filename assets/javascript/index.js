@@ -7,8 +7,25 @@ const wordList = [
   'Verde',
   'Naranja',
   'Negro',
-  'Blanco'
+  'Blanco',
+  'proscribir',
+  'delincuente',
+  'peligro',
+  'linchamiento',
+  'cuerda',
+  'ejecucion',
+  'justicia'
 ];
+
+const themeArray = [
+  'proscribir',
+  'delincuente',
+  'peligro',
+  'linchamiento',
+  'cuerda',
+  'ejecucion',
+  'justicia'
+]
 
 let correctLetterCount = 0;
 let wins = 0;
@@ -62,18 +79,18 @@ function start() {
   writeDOM();
 }
 
-function redo() {
+function redo() { // <-- problems
   // reset values
   correctLetterCount = 0;
-  theChosenOne;
-  chosenLetter;
+  // theChosenOne;
+  // chosenLetter;
   wordBlanks = [];
   guessedLetters = [];
   guessesRemain = 5;
   instructions = 'Press any key to start';
   //Function Resets
-  chooseWord();
-  writeWordBlanks(wordBlanks);
+  // chooseWord();
+  // writeWordBlanks(wordBlanks);
 
   // writeDOM();
 }
@@ -195,7 +212,7 @@ function oneUp() {
   // 5 seconds after winning, the game resets.
   setTimeout(() => {
    
-   redo();
+   start();
  }, 5000);
 
 }
@@ -209,7 +226,7 @@ function oneDown() {
 
   // 5 seconds after winning, the game resets.
   setTimeout(() => {
-    redo();
+    start();
     
   }, 5000);
 
