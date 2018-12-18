@@ -210,7 +210,7 @@ function youWin() {
 function oneUp() {
   wins++;
   instructionText.textContent =
-    'Great: You pass the turing test...sorta. Play more.';
+    'Great: You pass the Turing test...sorta. Play more.';
   // 5 seconds after winning, the game resets.
   setTimeout(() => {
     start();
