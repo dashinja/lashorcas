@@ -25,7 +25,7 @@ const themeArray = [
   'cuerda',
   'ejecucion',
   'justicia'
-]
+];
 
 let correctLetterCount = 0;
 let wins = 0;
@@ -58,7 +58,7 @@ let losesText = document.getElementById('loses-text');
 
 function writeDOM() {
   // write to DOM
-  guessedLettersText.textContent = guessedLetters.join(' ').toUpperCase()
+  guessedLettersText.textContent = guessedLetters.join(' ').toUpperCase();
   guessesRemainText.textContent = guessesRemain;
   instructionText.textContent = instructions;
   // theChosenOneTest.textContent = theChosenOne; // <--- wut?
@@ -77,9 +77,13 @@ function start() {
   makeWordBlanks();
   writeWordBlanks(wordBlanks);
   writeDOM();
+  console.log("I'm wins variable: ", wins);
+  console.log("I'm winsText: ", winsText);
+  console.log("I'm winsText.textContent: ", winsText.textContent);
 }
 
-function redo() { // <-- problems
+function redo() {
+  // <-- problems
   // reset values
   correctLetterCount = 0;
   // theChosenOne;
@@ -100,7 +104,7 @@ function chooseWord() {
   theChosenOne = wordList[
     Math.floor(Math.random() * wordList.length)
   ].toLowerCase();
-   (theChosenOne);
+  theChosenOne;
 }
 
 function makeWordBlanks() {
@@ -119,11 +123,11 @@ document.onkeyup = function(event) {
 
   if (guessedLetters.includes(chosenLetter)) {
     instructionText.textContent = `You already pressed ${chosenLetter}`;
-    guessesRemain--
+    guessesRemain--;
     writeDOM();
-    gameStatus()
+    gameStatus();
   } else {
-    writeDOM()
+    writeDOM();
     keyCheckTrue(chosenLetter);
   }
 };
@@ -131,14 +135,14 @@ document.onkeyup = function(event) {
 function keyCheckTrue(letter) {
   // key is in word
   if (theChosenOne.includes(letter)) {
-     ('I check if true');
+    ('I check if true');
     replaceLetter(letter);
     gameStatus();
   } else {
     // key not in word
-     ("I'm letter before keyCheckFalse(): ", letter);
+    //  ("I'm letter before keyCheckFalse(): ", letter);
     keyCheckFalse(letter);
-    gameStatus()
+    gameStatus();
   }
 }
 
@@ -151,7 +155,7 @@ function keyCheckFalse(letter) {
     guessesRemain--;
     //  ("I'm letter before the push: ", letter);
     guessedLetters.push(letter);
-    
+
     //  ('I am guessedLetters: ', guessedLetters);
     writeDOM();
   } else if (guessesRemain === 0) {
@@ -166,33 +170,30 @@ function replaceLetter(letter) {
     if (theChosenOne[i] === letter) {
       wordBlanks[i] = letter;
       correctLetterCount++;
-       (wordBlanks);
+      wordBlanks;
     }
   }
-   ('correctLetterCount: ', correctLetterCount);
+  // 'correctLetterCount: ', correctLetterCount;
 
   writeWordBlanks(wordBlanks);
-  gameStatus();
+  // gameStatus();
   //  (wordBlanks)
   // test = letter
   //  (test)
 }
+function gameStatus(gameCondition) {
+  const winCondition = correctLetterCount === theChosenOne.length;
+  const loseCondition1 = guessesRemain < 1;
+  const loseCondition2 = correctLetterCount > theChosenOne.length;
 
-function gameStatus() {
-  switch (correctLetterCount === theChosenOne.length) {
-    case true:
-      youWin();
-
-      break;
-
-    default:
-      instructions = 'Keep going!';
-  }
-
-  if (guessesRemain < 1) {
+  if (winCondition) {
+    youWin();
+  } else if (loseCondition1) {
     youLose();
-  } else if (correctLetterCount > theChosenOne.length) {
-    youLose()
+  } else if (loseCondition2) {
+    youLose();
+  } else {
+    instructions = 'Keep going!';
   }
 }
 
@@ -208,18 +209,18 @@ function youWin() {
 
 function oneUp() {
   wins++;
-  instructionText.textContent = 'Great: You pass the turing test...sorta. Play more.';
+  instructionText.textContent =
+    'Great: You pass the turing test...sorta. Play more.';
   // 5 seconds after winning, the game resets.
   setTimeout(() => {
-   
-   start();
- }, 5000);
-
+    start();
+  }, 5000);
 }
 
 function oneDown() {
   loses++;
-  instructionText.textContent = 'Jerk! You lost to a bot. Bro... do you even Turing!?!?';
+  instructionText.textContent =
+    'Jerk! You lost to a bot. Bro... do you even Turing!?!?';
 
   // alert('Jerk');
   // $('#myModalLose').modal(show)
@@ -227,10 +228,7 @@ function oneDown() {
   // 5 seconds after winning, the game resets.
   setTimeout(() => {
     start();
-    
   }, 5000);
-
-
 }
 
 //
