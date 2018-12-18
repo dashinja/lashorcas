@@ -37,6 +37,13 @@ let guessedLetters = [];
 let guessesRemain = 5;
 let instructions = 'Press any key to start';
 
+// Key Validation ////////////////
+//////////////////////////////////
+const alpha = /[A-Za-z\^\cA-\cZ]/i;
+const validateKey = RegExp(alpha);
+
+//////////////////////////////////
+//////////////////////////////////
 // Word blank tools
 let wordBlanksText = document.getElementById('wordBlanks-text');
 
@@ -120,15 +127,23 @@ function makeWordBlanks() {
 document.onkeyup = function(event) {
   // respond to key press
   chosenLetter = event.key;
-
-  if (guessedLetters.includes(chosenLetter)) {
-    instructionText.textContent = `You already pressed ${chosenLetter}`;
-    guessesRemain--;
+  console.log('I test validation keys: ', validateKey.test(chosenLetter));
+  console.log("I'm the chosenLetter before testing: ", chosenLetter);
+  if (validateKey.test(chosenLetter)) {
+    chosenLetter = chosenLetter.toLowerCase();
+    if (guessedLetters.includes(chosenLetter)) {
+      instructionText.textContent = `You already pressed ${chosenLetter}`;
+      guessesRemain--;
+      writeDOM();
+      gameStatus();
+    } else {
+      writeDOM();
+      keyCheckTrue(chosenLetter);
+    }
+  } else {
+    instructions = `You did not press a letter! What a bot!!`;
     writeDOM();
     gameStatus();
-  } else {
-    writeDOM();
-    keyCheckTrue(chosenLetter);
   }
 };
 
