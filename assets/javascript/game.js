@@ -1,4 +1,6 @@
 'use strict';
+
+console.log("Hi")
 // Variable Pieces
 const wordList = [
   'Rojo',
@@ -127,9 +129,9 @@ function makeWordBlanks() {
 document.onkeyup = function(event) {
   // respond to key press
   chosenLetter = event.key;
-  console.log('I test validation keys: ', validateKey.test(chosenLetter));
-  console.log("I'm the chosenLetter before testing: ", chosenLetter);
-  if (validateKey.test(chosenLetter)) {
+const betterValidation = (event.keyCode >= 65 && event.keyCode <= 90)
+
+  if (betterValidation) {
     chosenLetter = chosenLetter.toLowerCase();
     if (guessedLetters.includes(chosenLetter)) {
       instructionText.textContent = `You already pressed ${chosenLetter}`;
