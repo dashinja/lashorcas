@@ -1,6 +1,5 @@
-'use strict';
+'use strict'
 
-console.log("Hi")
 // Variable Pieces
 const wordList = [
   'Rojo',
@@ -16,8 +15,8 @@ const wordList = [
   'linchamiento',
   'cuerda',
   'ejecucion',
-  'justicia'
-];
+  'justicia',
+]
 
 const themeArray = [
   'proscribir',
@@ -26,140 +25,125 @@ const themeArray = [
   'linchamiento',
   'cuerda',
   'ejecucion',
-  'justicia'
-];
+  'justicia',
+]
 
-let correctLetterCount = 0;
-let wins = 0;
-let loses = 0;
-let theChosenOne;
-let chosenLetter;
-let wordBlanks = [];
-let guessedLetters = [];
-let guessesRemain = 5;
-let instructions = 'Press any key to start';
+let correctLetterCount = 0
+let wins = 0
+let loses = 0
+let theChosenOne
+let chosenLetter
+let wordBlanks = []
+let guessedLetters = []
+let guessesRemain = 5
+let instructions = 'Press any key to start'
 
 // Key Validation ////////////////
 //////////////////////////////////
-const alpha = /[A-Za-z\^\cA-\cZ]/i;
-const validateKey = RegExp(alpha);
+const alpha = /[A-Za-z\^\cA-\cZ]/i
+const validateKey = RegExp(alpha)
 
 //////////////////////////////////
 //////////////////////////////////
 // Word blank tools
-let wordBlanksText = document.getElementById('wordBlanks-text');
+let wordBlanksText = document.getElementById('wordBlanks-text')
 
 // Guessed letter tools
-let guessedLettersText = document.getElementById('guessedLetters-text');
+let guessedLettersText = document.getElementById('guessedLetters-text')
 
 // Guess count tools
-let guessesRemainText = document.getElementById('guessesRemain-text');
+let guessesRemainText = document.getElementById('guessesRemain-text')
 
 // Instruction tools
-let instructionText = document.getElementById('instruction-text');
+let instructionText = document.getElementById('instruction-text')
 
 // The Word Dev tool test
 // let theChosenOneTest = document.getElementById('theWordTest-text');
 
-let winsText = document.getElementById('wins-text');
+let winsText = document.getElementById('wins-text')
 
-let losesText = document.getElementById('loses-text');
+let losesText = document.getElementById('loses-text')
 
 function writeDOM() {
   // write to DOM
-  guessedLettersText.textContent = guessedLetters.join(' ').toUpperCase();
-  guessesRemainText.textContent = guessesRemain;
-  instructionText.textContent = instructions;
+  guessedLettersText.textContent = guessedLetters.join(' ').toUpperCase()
+  guessesRemainText.textContent = guessesRemain
+  instructionText.textContent = instructions
   // theChosenOneTest.textContent = theChosenOne; // <--- wut?
-  winsText.textContent = wins;
-  losesText.textContent = loses;
+  winsText.textContent = wins
+  losesText.textContent = loses
 }
 
 function writeWordBlanks(writables) {
-  wordBlanksText.textContent = writables.join(' ');
+  wordBlanksText.textContent = writables.join(' ')
 }
 
 function start() {
   // init start values
-  redo();
-  chooseWord();
-  makeWordBlanks();
-  writeWordBlanks(wordBlanks);
-  writeDOM();
-  console.log("I'm wins variable: ", wins);
-  console.log("I'm winsText: ", winsText);
-  console.log("I'm winsText.textContent: ", winsText.textContent);
+  redo()
+  chooseWord()
+  makeWordBlanks()
+  writeWordBlanks(wordBlanks)
+  writeDOM()
 }
 
 function redo() {
-  // <-- problems
-  // reset values
-  correctLetterCount = 0;
-  // theChosenOne;
-  // chosenLetter;
-  wordBlanks = [];
-  guessedLetters = [];
-  guessesRemain = 5;
-  instructions = 'Press any key to start';
-  //Function Resets
-  // chooseWord();
-  // writeWordBlanks(wordBlanks);
-
-  // writeDOM();
+  correctLetterCount = 0
+  chosenLetter
+  wordBlanks = []
+  guessedLetters = []
+  guessesRemain = 5
+  instructions = 'Press any key to start'
 }
 
 function chooseWord() {
-  // choose word
   theChosenOne = wordList[
     Math.floor(Math.random() * wordList.length)
-  ].toLowerCase();
-  theChosenOne;
+  ].toLowerCase()
+  theChosenOne
 }
 
 function makeWordBlanks() {
-  theChosenOne.split('');
+  theChosenOne.split('')
 
   for (let i = 0; i < theChosenOne.length; i++) {
-    wordBlanks.push('_');
+    wordBlanks.push('_')
   }
-  // writeWordBlanks(wordBlanks)
-  //  (writeWordBlanks(wordBlanks));
 }
 
 document.onkeyup = function(event) {
   // respond to key press
-  chosenLetter = event.key;
-const betterValidation = (event.keyCode >= 65 && event.keyCode <= 90)
+  chosenLetter = event.key
+  const betterValidation = event.keyCode >= 65 && event.keyCode <= 90
 
   if (betterValidation) {
-    chosenLetter = chosenLetter.toLowerCase();
+    chosenLetter = chosenLetter.toLowerCase()
     if (guessedLetters.includes(chosenLetter)) {
-      instructionText.textContent = `You already pressed ${chosenLetter}`;
-      guessesRemain--;
-      writeDOM();
-      gameStatus();
+      instructionText.textContent = `You already pressed ${chosenLetter}`
+      guessesRemain--
+      writeDOM()
+      gameStatus()
     } else {
-      writeDOM();
-      keyCheckTrue(chosenLetter);
+      writeDOM()
+      keyCheckTrue(chosenLetter)
     }
   } else {
-    instructions = `You did not press a letter! What a bot!!`;
-    writeDOM();
-    gameStatus();
+    instructions = `You did not press a letter! What a bot!!`
+    writeDOM()
+    gameStatus()
   }
-};
+}
 
 function keyCheckTrue(letter) {
   // key is in word
   if (theChosenOne.includes(letter)) {
-    ('I check if true');
-    replaceLetter(letter);
-    gameStatus();
+    ;('I check if true')
+    replaceLetter(letter)
+    gameStatus()
   } else {
     // key not in word
-    //  ("I'm letter before keyCheckFalse(): ", letter);
-    keyCheckFalse(letter);
-    gameStatus();
+    keyCheckFalse(letter)
+    gameStatus()
   }
 }
 
@@ -169,14 +153,12 @@ function keyCheckFalse(letter) {
 
   // DECREMENT guesses remaining
   if (!theChosenOne.includes(letter) && guessesRemain !== 0) {
-    guessesRemain--;
-    //  ("I'm letter before the push: ", letter);
-    guessedLetters.push(letter);
+    guessesRemain--
+    guessedLetters.push(letter)
 
-    //  ('I am guessedLetters: ', guessedLetters);
-    writeDOM();
+    writeDOM()
   } else if (guessesRemain === 0) {
-    youLose();
+    youLose()
   }
 }
 
@@ -185,70 +167,61 @@ function replaceLetter(letter) {
 
   for (let i = 0; i < theChosenOne.length; i++) {
     if (theChosenOne[i] === letter) {
-      wordBlanks[i] = letter;
-      correctLetterCount++;
-      wordBlanks;
+      wordBlanks[i] = letter
+      correctLetterCount++
+      wordBlanks
     }
   }
-  // 'correctLetterCount: ', correctLetterCount;
 
-  writeWordBlanks(wordBlanks);
-  // gameStatus();
-  //  (wordBlanks)
-  // test = letter
-  //  (test)
+  writeWordBlanks(wordBlanks)
 }
+
 function gameStatus(gameCondition) {
-  const winCondition = correctLetterCount === theChosenOne.length;
-  const loseCondition1 = guessesRemain < 1;
-  const loseCondition2 = correctLetterCount > theChosenOne.length;
+  const winCondition = correctLetterCount === theChosenOne.length
+  const loseCondition1 = guessesRemain < 1
+  const loseCondition2 = correctLetterCount > theChosenOne.length
 
   if (winCondition) {
-    youWin();
+    youWin()
   } else if (loseCondition1) {
-    youLose();
+    youLose()
   } else if (loseCondition2) {
-    youLose();
+    youLose()
   } else {
-    instructions = 'Keep going!';
+    instructions = 'Keep going!'
   }
 }
 
 function youLose() {
   // you lose
-  oneDown();
+  oneDown()
 }
 
 function youWin() {
   // you win
-  oneUp();
+  oneUp()
 }
 
 function oneUp() {
-  wins++;
+  wins++
   instructionText.textContent =
-    'Great: You pass the Turing test...sorta. Play more.';
+    'Great: You pass the Turing test...sorta. Play more.'
   // 5 seconds after winning, the game resets.
   setTimeout(() => {
-    start();
-  }, 5000);
+    start()
+  }, 5000)
 }
 
 function oneDown() {
-  loses++;
+  loses++
   instructionText.textContent =
-    'Jerk! You lost to a bot. Bro... do you even Turing!?!?';
-
-  // alert('Jerk');
-  // $('#myModalLose').modal(show)
+    'Jerk! You lost to a bot. Bro... do you even Turing!?!?'
 
   // 5 seconds after winning, the game resets.
   setTimeout(() => {
-    start();
-  }, 5000);
+    start()
+  }, 5000)
 }
 
-//
-
 //Start Game
-start();
+start()
