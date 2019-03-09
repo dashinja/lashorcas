@@ -38,13 +38,10 @@ let guessedLetters = []
 let guessesRemain = 5
 let instructions = 'Press any key to start'
 
-// Key Validation ////////////////
-//////////////////////////////////
+// Key Validation
 const alpha = /[A-Za-z\^\cA-\cZ]/i
 const validateKey = RegExp(alpha)
 
-//////////////////////////////////
-//////////////////////////////////
 // Word blank tools
 let wordBlanksText = document.getElementById('wordBlanks-text')
 
@@ -58,7 +55,6 @@ let guessesRemainText = document.getElementById('guessesRemain-text')
 let instructionText = document.getElementById('instruction-text')
 
 // The Word Dev tool test
-// let theChosenOneTest = document.getElementById('theWordTest-text');
 
 let winsText = document.getElementById('wins-text')
 
@@ -69,7 +65,6 @@ function writeDOM() {
   guessedLettersText.textContent = guessedLetters.join(' ').toUpperCase()
   guessesRemainText.textContent = guessesRemain
   instructionText.textContent = instructions
-  // theChosenOneTest.textContent = theChosenOne; // <--- wut?
   winsText.textContent = wins
   losesText.textContent = loses
 }
@@ -149,7 +144,7 @@ function keyCheckTrue(letter) {
 
 function keyCheckFalse(letter) {
   // key not in word
-  // post to the DOM wrong letters
+  // post to the DOM incorrect letters
 
   // DECREMENT guesses remaining
   if (!theChosenOne.includes(letter) && guessesRemain !== 0) {
