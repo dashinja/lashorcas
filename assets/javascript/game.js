@@ -210,7 +210,7 @@ function oneUp() {
 function oneDown() {
   loses++
   instructionText.textContent =
-    'Jerk! You lost to a bot. Bro... do you even Turing!?!?'
+    'Jerk! You lost to a bot. Yo... do you even Turing!?!?'
 
   // 5 seconds after winning, the game resets.
   setTimeout(() => {
