@@ -1,4 +1,4 @@
-# Word Guess Game
+# Spanish Language Word Guess Game
 
 ## How to Play
 * Look at the number of blanks available in the fill in the blanks field
