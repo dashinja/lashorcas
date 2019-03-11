@@ -95,15 +95,10 @@ function chooseWord() {
   theChosenOne = wordList[
     Math.floor(Math.random() * wordList.length)
   ].toLowerCase()
-  theChosenOne
 }
 
 function makeWordBlanks() {
-  theChosenOne.split('')
-
-  for (let i = 0; i < theChosenOne.length; i++) {
-    wordBlanks.push('_')
-  }
+  theChosenOne.split('').forEach(letter => wordBlanks.push("_"))
 }
 
 document.onkeyup = function(event) {
@@ -118,11 +113,13 @@ document.onkeyup = function(event) {
       guessesRemain--
       writeDOM()
       gameStatus()
-    } else {
+    } 
+    else {
       writeDOM()
       keyCheckTrue(chosenLetter)
     }
-  } else {
+  } 
+  else {
     instructions = `You did not press a letter! What a bot!!`
     writeDOM()
     gameStatus()
@@ -132,7 +129,6 @@ document.onkeyup = function(event) {
 function keyCheckTrue(letter) {
   // key is in word
   if (theChosenOne.includes(letter)) {
-    ;('I check if true')
     replaceLetter(letter)
     gameStatus()
   } else {
@@ -150,7 +146,6 @@ function keyCheckFalse(letter) {
   if (!theChosenOne.includes(letter) && guessesRemain !== 0) {
     guessesRemain--
     guessedLetters.push(letter)
-
     writeDOM()
   } else if (guessesRemain === 0) {
     youLose()
@@ -159,7 +154,6 @@ function keyCheckFalse(letter) {
 
 function replaceLetter(letter) {
   // show right letters in blanks
-
   for (let i = 0; i < theChosenOne.length; i++) {
     if (theChosenOne[i] === letter) {
       wordBlanks[i] = letter
@@ -167,11 +161,10 @@ function replaceLetter(letter) {
       wordBlanks
     }
   }
-
   writeWordBlanks(wordBlanks)
 }
 
-function gameStatus(gameCondition) {
+function gameStatus() {
   const winCondition = correctLetterCount === theChosenOne.length
   const loseCondition1 = guessesRemain < 1
   const loseCondition2 = correctLetterCount > theChosenOne.length
